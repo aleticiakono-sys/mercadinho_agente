@@ -1,0 +1,89 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./docs/**)",
+      "Read(./apps/**)",
+      "Read(./packages/**)",
+      "Edit(./apps/**)",
+      "Edit(./packages/**)",
+      "Edit(./docs/**)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(pnpm *)",
+      "Bash(npm *)",
+      "Bash(yarn *)",
+      "Bash(./mvnw *)",
+      "Bash(dotnet *)",
+      "Bash(pytest *)",
+      "Bash(ruff *)",
+      "Bash(alembic *)"
+    ],
+    "deny": [
+      "Read(./.env*)",
+      "Read(./**/.env*)",
+      "Read(./**/secrets/**)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Read(./**/*production*)",
+      "Bash(rm -rf *)",
+      "Bash(chmod 777 *)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | sh)",
+      "Bash(git push --force*)",
+      "Bash(docker system prune -a*)",
+      "Bash(*DROP DATABASE*)",
+      "Bash(*TRUNCATE*)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(npm publish*)",
+      "Bash(pnpm publish*)",
+      "Bash(dotnet nuget push*)",
+      "Bash(*migration*)",
+      "Bash(*deploy*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/Aline/AppData/Local/Programs/Python/Python314/Scripts/graphify.EXE hook-guard search"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:/Users/Aline/AppData/Local/Programs/Python/Python314/Scripts/graphify.EXE hook-guard read"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/pre-tool-use.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/post-edit-format.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

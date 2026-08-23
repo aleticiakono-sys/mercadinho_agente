@@ -1,0 +1,32 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.pfx
+
+# Graphify Knowledge Graph Outputs
+graphify-out/
+.graphify_*
+
+# Temporary scratch scripts
+scratch/
+
+# Dependencies & Build Outputs
+node_modules/
+dist/
+build/
+bin/
+obj/
+__pycache__/
+*.pyc
+.venv/
+env/
+venv/
+target/
+.gradle/
+.idea/
+.vscode/
+*.log
